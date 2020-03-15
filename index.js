@@ -23,7 +23,7 @@ const swaggerOptions = {
             servers: ["http://localhost:8000"]
         }
     },
-    apis: ["./models/Anime.js", "index.js"]
+    apis: ["./models/Anime.js", "./models/UserAnimes.js", "index.js"]
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
@@ -36,42 +36,83 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  * @swagger
  * /:
  *  get:
- *      description: List Animes in the dataset
+ *      summary: Get the top ranked and popular animes
+ *      parameters:
+ *        - in: query
+ *          name: genre
+ *          schema:
+ *              type: string
+ *          description: Filter results by the provided genre
+ *        - in: query
+ *          name: year
+ *          schema:
+ *              type: string
+ *          description: Filter results by year
+ *        - in: query
+ *          name: studio
+ *          schema:
+ *              type: string
+ *          description: Filter resutls by studio
  *      responses:
  *          '200':
- *              description: List of animes
+ *              description: Successful operation
  *              content:
  *                  application/json:
  *                      schema:
  *                          type: array
  *                          items:
- *                              $ref: '#/components/schemas/Anime'
+ *                              $ref: '#/components/schemas/Anime' 
  *          '400':
  *              description: Error
  */
 app.get("/", (req, res) => {
-    const animes = [];
+    //Serviço nº2
+    res.status(200).send("Top ranked and popular animes");
+});
 
-    res.send("Hello World!")
-//    const readStream = fs.createReadStream('./dataset/anime_cleaned.csv');
-//    const parser = csv.parse({columns: true});
 
-//    parser.on('readable', () => {
-//        while(record = parser.read()) {
-//            console.log(record);
-//            animes.push(record);
-//        }
-//    });
-
-//    parser.on('error', () => {
-//        res.status(400).send("An error as ocurred.");
-//    });
-
-//    parser.on('finish', () => {
-//        res.status(200).json(animes);
-//    });
-
-//    readStream.pipe(parser);
+/**
+ * @swagger
+ * /anime:
+ *  get:
+ *      summary: Get list of animes that match the filters provided.
+ *      parameters:
+ *        - in: query
+ *          name: anime_id
+ *          schema:
+ *              type: integer
+ *              format: uuid
+ *          description: Filter by anime's unique identifier.
+ *        - in: query
+ *          name: status
+ *          schema:
+ *              type: string
+ *          description: Filter by anime's status (Finished Airing, Currently Airing).
+ *        - in: query
+ *          name: studio
+ *          schema:
+ *              type: string
+ *          description: Filter by anime's studio
+ *        - in: query
+ *          name: maxResults
+ *          schema:
+ *              type: integer
+ *          description: Maximum number of animes retrieved. 
+ *      responses:
+ *          '200':
+ *              description: Successful operation
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Anime' 
+ *          '400':
+ *              description: Error
+ */
+app.get("/anime", (req, res) => {
+    //Serviço nº1
+    res.status(200).send("List of animes that match the filters");
 });
 
 
