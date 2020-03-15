@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "MyAnimeListAPI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "Google",
+    "Cloud",
+    "Node",
+    "Swagger"
+  ],
+  "author": "FCUL",
+  "license": "ISC",
+  "dependencies": {
+    "csv": "^5.3.2",
+    "express": "^4.17.1",
+    "swagger-jsdoc": "^3.5.0",
+    "swagger-ui-express": "^4.1.3"
+  }
+}
